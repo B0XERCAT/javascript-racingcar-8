@@ -1,9 +1,13 @@
 import { Console } from "@woowacourse/mission-utils";
 
-async function readUserInput() {
+async function readCarsInput() {
   return await Console.readLineAsync(
     "경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)\n"
   );
+}
+
+async function readCountInput() {
+  return await Console.readLineAsync("시도할 횟수는 몇 회인가요?\n");
 }
 
 function extractCars(input) {
@@ -12,8 +16,11 @@ function extractCars(input) {
 
 class App {
   async run() {
-    const userInput = await readUserInput();
-    const cars = extractCars(userInput);
+    const carsInput = await readCarsInput();
+    const countInput = await readCountInput();
+
+    const cars = extractCars(carsInput);
+    const count = Number(countInput);
   }
 }
 
