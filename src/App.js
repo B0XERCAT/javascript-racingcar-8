@@ -42,6 +42,14 @@ function runRace(roundCount, initialDistances) {
   return finalDistances;
 }
 
+function getWinners(finalDistances, carNames) {
+  const maxDistance = Math.max(...finalDistances);
+  const winners = carNames.filter(
+    (_, index) => finalDistances[index] === maxDistance
+  );
+  return winners;
+}
+
 class App {
   async run() {
     const carNamesInput = await readCarNames();
@@ -53,6 +61,8 @@ class App {
     const initialDistances = initializeDistances(carNames);
 
     const finalDistances = runRace(roundCount, initialDistances);
+
+    const winners = getWinners(finalDistances, carNames);
 
     // TODO: determin winner and print
   }
