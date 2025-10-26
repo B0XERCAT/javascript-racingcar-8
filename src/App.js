@@ -29,11 +29,19 @@ function updateDistances(distances) {
   return distances.map((distance) => distance + moveCar());
 }
 
-function runRace(roundCount, initialDistances) {
+function printRoundResult(distances, carNames) {
+  Console.print("");
+  distances.map((distance, index) => {
+    Console.print(`${carNames[index]} : ${"-".repeat(distance)}`);
+  });
+}
+
+function runRace(roundCount, initialDistances, carNames) {
+  Console.print("실행 결과");
   const finalDistances = Array.from({ length: roundCount }).reduce(
     (distances) => {
       const newDistances = updateDistances(distances);
-      // TODO: print each round
+      printRoundResult(newDistances, carNames);
       return newDistances;
     },
     initialDistances
@@ -50,6 +58,9 @@ function getWinners(finalDistances, carNames) {
   return winners;
 }
 
+function printFinalResult(winners) {
+  Console.print(`\n최종 우승자 : ${winners.join(", ")}`);
+}
 class App {
   async run() {
     const carNamesInput = await readCarNames();
@@ -60,11 +71,11 @@ class App {
 
     const initialDistances = initializeDistances(carNames);
 
-    const finalDistances = runRace(roundCount, initialDistances);
+    const finalDistances = runRace(roundCount, initialDistances, carNames);
 
     const winners = getWinners(finalDistances, carNames);
 
-    // TODO: determin winner and print
+    printFinalResult(winners);
   }
 }
 
