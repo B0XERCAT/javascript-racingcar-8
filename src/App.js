@@ -16,9 +16,27 @@ function extractCars(input) {
   return input.split(",").map((name) => name.trim());
 }
 
+function initializeRace(cars) {
+  return Array.from({ length: cars.length }, () => 0);
+}
+
 function moveCar() {
   const randomNumber = Random.pickNumberInList(SINGLE_DIGIT);
   return randomNumber >= 4 ? 1 : 0;
+}
+
+function updateDistances(distances) {
+  return distances.map((distance) => distance + moveCar());
+}
+
+function runRace(count, initialDistances) {
+  const finalDistances = Array.from({ length: count }).reduce((distances) => {
+    const newDistances = updateDistances(distances);
+    // TODO: print each round
+    return newDistances;
+  }, initialDistances);
+
+  return finalDistances;
 }
 
 class App {
@@ -28,6 +46,12 @@ class App {
 
     const cars = extractCars(carsInput);
     const count = Number(countInput);
+
+    const initialDistances = initializeRace(cars);
+
+    const finalDistances = runRace(count, initialDistances);
+
+    // TODO: determin winner and print
   }
 }
 
