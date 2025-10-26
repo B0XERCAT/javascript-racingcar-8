@@ -1,4 +1,6 @@
-import { Console } from "@woowacourse/mission-utils";
+import { Console, Random } from "@woowacourse/mission-utils";
+
+const SINGLE_DIGIT = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 async function readCarsInput() {
   return await Console.readLineAsync(
@@ -12,6 +14,11 @@ async function readCountInput() {
 
 function extractCars(input) {
   return input.split(",").map((name) => name.trim());
+}
+
+function moveCar() {
+  const randomNumber = Random.pickNumberInList(SINGLE_DIGIT);
+  return randomNumber >= 4 ? 1 : 0;
 }
 
 class App {
