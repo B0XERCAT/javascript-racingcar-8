@@ -22,6 +22,14 @@ function parseCarNames(input) {
   return carNames;
 }
 
+function parseRoundCount(input) {
+  const roundCount = Number(input);
+  if (isNaN(roundCount)) {
+    throw new Error("[ERROR]: 시도 횟수는 숫자로 입력해주세요.");
+  }
+  return roundCount;
+}
+
 function initializeDistances(cars) {
   return Array.from({ length: cars.length }, () => 0);
 }
@@ -73,7 +81,7 @@ class App {
     const carNames = parseCarNames(carNamesInput);
 
     const roundCountInput = await readRoundCount();
-    const roundCount = Number(roundCountInput);
+    const roundCount = parseRoundCount(roundCountInput);
 
     const initialDistances = initializeDistances(carNames);
 
