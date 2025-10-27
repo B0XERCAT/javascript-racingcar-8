@@ -12,22 +12,35 @@ async function readRoundCount() {
   return await Console.readLineAsync("시도할 횟수는 몇 회인가요?\n");
 }
 
+function splitCarNames(input) {
+  return input.split(",").map((name) => name.trim());
+}
+
+function validateCarNameLength(name) {
+  if (name.length > 5 || name.length == 0) {
+    throw new Error("[ERROR]: 자동차 이름은 1자 이상 5자 이하만 가능합니다.");
+  }
+  return name;
+}
+
 function parseCarNames(input) {
-  const carNames = input.split(",").map((name) => {
-    if (name.trim().length > 5) {
-      throw new Error("[ERROR]: 자동차 이름은 5자 이하만 가능합니다.");
-    }
-    return name.trim();
-  });
-  return carNames;
+  const carNames = splitCarNames(input);
+  return carNames.map(validateCarNameLength);
+}
+
+function validateRoundCount(count) {
+  if (isNaN(count)) {
+    throw new Error("[ERROR]: 시도 횟수는 숫자만 가능합니다.");
+  }
+  if (count < 0) {
+    throw new Error("[ERROR]: 시도 횟수에 음수는 입력할 수 없습니다.");
+  }
+  return count;
 }
 
 function parseRoundCount(input) {
   const roundCount = Number(input);
-  if (isNaN(roundCount)) {
-    throw new Error("[ERROR]: 시도 횟수는 숫자로 입력해주세요.");
-  }
-  return roundCount;
+  return validateRoundCount(roundCount);
 }
 
 function initializeDistances(cars) {
