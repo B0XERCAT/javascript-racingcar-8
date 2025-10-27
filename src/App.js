@@ -13,7 +13,7 @@ async function readRoundCount() {
 }
 
 function printFinalResult(winners) {
-  Console.print(`\n최종 우승자 : ${winners.join(", ")}`);
+  Console.print(`최종 우승자 : ${winners.join(", ")}`);
 }
 
 class App {

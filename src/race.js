@@ -15,14 +15,14 @@ function updateDistances(distances) {
 }
 
 function printRoundResult(distances, carNames) {
-  Console.print("");
   distances.map((distance, index) => {
     Console.print(`${carNames[index]} : ${"-".repeat(distance)}`);
   });
+  Console.print("");
 }
 
 export function runRace(roundCount, initialDistances, carNames) {
-  Console.print("실행 결과");
+  Console.print("\n실행 결과");
   const finalDistances = Array.from({ length: roundCount }).reduce(
     (distances) => {
       const newDistances = updateDistances(distances);
