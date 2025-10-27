@@ -13,7 +13,13 @@ async function readRoundCount() {
 }
 
 function parseCarNames(input) {
-  return input.split(",").map((name) => name.trim());
+  const carNames = input.split(",").map((name) => {
+    if (name.trim().length > 5) {
+      throw new Error("[ERROR]: 자동차 이름은 5자 이하만 가능합니다.");
+    }
+    return name.trim();
+  });
+  return carNames;
 }
 
 function initializeDistances(cars) {
@@ -64,9 +70,9 @@ function printFinalResult(winners) {
 class App {
   async run() {
     const carNamesInput = await readCarNames();
-    const roundCountInput = await readRoundCount();
-
     const carNames = parseCarNames(carNamesInput);
+
+    const roundCountInput = await readRoundCount();
     const roundCount = Number(roundCountInput);
 
     const initialDistances = initializeDistances(carNames);
